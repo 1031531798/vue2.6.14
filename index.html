@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- <span>{{getUserName}}</span> -->
+    <span>{{getFunctionComputed('1111')}}</span>
+    <span>{{getFunctionComputed('2222')}}</span>
+    <button @click="changeData">change name</button>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      name: 'testVue',
+      data () {
+        return {
+          name: 'myName',
+          age: () => { console.log('2222')},
+          dept: {
+            company: {
+              first: '易航海'
+            }
+          },
+          userList: [1, 2, 3]
+        }
+      },
+      methods : {
+        changeData () {
+          this.name = '林子健'
+          this.dept.company.first = '岭上建设'
+        },
+        getName () {
+          console.log(this.name)
+        }
+      },
+      mounted() {
+        console.log(this['dept'])
+        this.dept.company.first = '岭上建设'
+        console.log(this._computedWatchers)
+
+      },
+      computed: {
+        getUserName () {
+          return this.name
+        },
+        getFunctionComputed () {
+          return (name) => {
+            return name
+          }
+        }
+      },
+    })
+  </script>
+</body>
+</html>
